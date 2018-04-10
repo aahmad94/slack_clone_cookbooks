@@ -1,4 +1,3 @@
-# deploy script here
 service "spooky" do
   action [:stop]
 end 

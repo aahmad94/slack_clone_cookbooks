@@ -1,4 +1,3 @@
-# setup script here
 
 include_recipe "ruby-ng::dev"
 include_recipe "nodejs"
