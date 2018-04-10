@@ -1,3 +1,4 @@
+# setup script here
 
 include_recipe "ruby-ng::dev"
 include_recipe "nodejs"
@@ -9,25 +10,25 @@ include_recipe "unicorn"
 apt_package 'zlib1g-dev'
 apt_package 'libpq-dev'
 
-template "spooky_service" do
-    path "/etc/init.d/spooky"
-    source "spooky_service.erb"
+template "slack_clone_service" do
+    path "/etc/init.d/slack_clone"
+    source "slack_clone_service.erb"
     owner "root"
     group "root"
     mode "0755"
 end
 
-service "spooky" do
+service "slack_clone" do
   supports :restart => true, :start => true, :stop => true, :reload => true
   action [ :enable ]
 end 
 
-template "#{node['nginx']['dir']}/sites-available/spooky" do
-  source 'spooky_site.erb'
+template "#{node['nginx']['dir']}/sites-available/slack_clone" do
+  source 'slack_clone_site.erb'
   notifies :reload, 'service[nginx]', :delayed
 end
 
-nginx_site 'spooky' do
+nginx_site 'slack_clone' do
   action :enable
 end
 
@@ -40,6 +41,6 @@ end
 
 unicorn_config "/opt/unicorn.rb" do
   listen ({"unix:/tmp/sockets/unicorn.sock": nil})
-  working_directory node[:spooky][:path]
+  working_directory node[:slack_clone][:path]
   # /config/unicorn.rb
 end

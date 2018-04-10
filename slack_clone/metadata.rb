@@ -1,6 +1,6 @@
-name        "spooky"
-description "Installs Spooky"
-maintainer  "Gene"
+name        "slack_clone"
+description "Installs slack_clone"
+maintainer  "Adeel"
 license     "Apache 2.0"
 version     "1.0.0"
 
