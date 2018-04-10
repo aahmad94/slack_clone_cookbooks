@@ -4,7 +4,7 @@ default['nodejs']['version'] = "6.10.1"
 default['nodejs']['npm']['version'] = "5.2.0"
 default['nginx']['default_site_enabled'] = false
 
-default[:slack_clone][:git_repository] = "https://github.com/aahmad94/wookiee_chat/"
+default[:slack_clone][:git_repository] = "https://github.com/aahmad94/wookiee/"
 default[:slack_clone][:git_revision] = "master"
 default[:slack_clone][:path] = "/opt/slack_clone"
 
