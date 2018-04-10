@@ -9,8 +9,8 @@
 # Description:       Enable service provided by daemon.
 ### END INIT INFO
 
-dir="<%= node[slack_clone][:path] %>"
-cmd="<%= node[slack_clone][:start_cmd] %>"
+dir="<%= node[:slack_clone][:path] %>"
+cmd="<%= node[:slack_clone][:start_cmd] %>"
 # user="root"
 
 name=`basename $0`
@@ -34,13 +34,13 @@ case "$1" in
         echo "Starting $name"
         cd "$dir"
         
-        <% if node[slack_clone].attribute?('cdn_host') %>
+        <% if node[:slack_clone].attribute?('cdn_host') %>
         git_commit=`cd ${dir}; git rev-parse HEAD`
-        export CDN_HOST="<%= node[slack_clone][:cdn_host] %>/${git_commit}/"
+        export CDN_HOST="<%= node[:slack_clone][:cdn_host] %>/${git_commit}/"
         <% else %>
         export RAILS_SERVE_STATIC_FILES="true"
         <% end %>
-        <% node[slack_clone][:environment].each do |k, v| %>
+        <% node[:slack_clone][:environment].each do |k, v| %>
         export <%= k%>="<%= v%>"
         <% end %>
 
